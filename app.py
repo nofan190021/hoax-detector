@@ -91,7 +91,7 @@ def index():
             confidence = round(max(prob) * 100, 2)
 
             # 🔥 THRESHOLD (BISA DIUBAH)
-            if prob[1] > 0.45:
+            if prob[1] > 0.4:
                 result = "REAL"
             else:
                 result = "FAKE"
