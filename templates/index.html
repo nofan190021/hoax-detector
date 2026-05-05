@@ -1,78 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hoax Detector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<meta charset="UTF-8">
+<title>Hoax Detector</title>
 
-        .container {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            width: 400px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.container {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 16px;
+    width: 420px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+}
 
-        textarea {
-            width: 100%;
-            height: 120px;
-            border-radius: 8px;
-            border: none;
-            padding: 10px;
-            resize: none;
-            margin-bottom: 15px;
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
 
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #38bdf8;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-        }
+h1 {
+    margin-bottom: 20px;
+}
 
-        button:hover {
-            background: #0ea5e9;
-        }
+textarea {
+    width: 100%;
+    height: 130px;
+    border-radius: 10px;
+    border: none;
+    padding: 12px;
+    resize: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+    outline: none;
+}
 
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        .real {
-            background: #22c55e;
-        }
+button:hover {
+    transform: scale(1.03);
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+}
 
-        .fake {
-            background: #ef4444;
-        }
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    animation: fadeIn 0.4s ease;
+}
 
-        .error {
-            background: #facc15;
-            color: black;
-        }
-    </style>
+.real {
+    background: #16a34a;
+}
+
+.fake {
+    background: #dc2626;
+}
+
+.error {
+    background: #facc15;
+    color: black;
+}
+
+.conf {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.footer {
+    margin-top: 15px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
@@ -80,24 +105,27 @@
 
     <form method="POST">
         <textarea name="text" placeholder="Masukkan berita di sini..." required></textarea>
-        <button type="submit">Cek Berita</button>
+        <button type="submit">🔍 Cek Berita</button>
     </form>
 
     {% if result %}
-        <div class="result 
+        <div class="result-box 
             {% if result == 'REAL' %}real
             {% elif result == 'FAKE' %}fake
             {% else %}error
             {% endif %}">
             
-            <h3>{{ result }}</h3>
+            {{ result }}
 
             {% if confidence %}
-                <p>Confidence: {{ confidence }}%</p>
+                <div class="conf">Confidence: {{ confidence }}%</div>
             {% endif %}
         </div>
     {% endif %}
 
+    <div class="footer">
+        AI-based Hoax Detection System
+    </div>
 </div>
 
 </body>
