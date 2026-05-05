@@ -71,18 +71,34 @@ def index():
                     confidence=0
                 )
 
-            # PREPROCESS
             clean = preprocess(text)
+
+            # VALIDASI TEKS TERLALU PENDEK
+            if len(clean.split()) < 3:
+                return render_template(
+                    'index.html',
+                    result="Teks terlalu pendek",
+                    confidence=0
+                )
 
             # VECTORIZER
             vector = vectorizer.transform([clean])
 
             # PREDIKSI
-            pred = model.predict(vector)[0]
             prob = model.predict_proba(vector)[0]
 
+            # CONFIDENCE
             confidence = round(max(prob) * 100, 2)
-            result = "REAL" if pred == 1 else "FAKE"
+
+            # 🔥 THRESHOLD (BISA DIUBAH)
+            if prob[1] > 0.45:
+                result = "REAL"
+            else:
+                result = "FAKE"
+
+            # 🔥 FALLBACK (BIAR TIDAK NGACO)
+            if confidence < 55:
+                result = "UNCERTAIN"
 
     except Exception:
         return render_template(
