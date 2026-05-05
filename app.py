@@ -39,6 +39,11 @@ def index():
     if request.method == 'POST':
         text = request.form['text']
 
+        if not text or text.strip() == "":
+            return render_template('index.html',
+                                   result="Silakan masukkan teks terlebih dahulu",
+                                   confidence=0)
+
         clean = preprocess(text)
         vector = vectorizer.transform([clean])
 
