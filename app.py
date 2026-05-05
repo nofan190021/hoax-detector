@@ -12,6 +12,7 @@ app = Flask(__name__)
 # download nltk
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 # load model
 model = pickle.load(open('model.pkl', 'rb'))
