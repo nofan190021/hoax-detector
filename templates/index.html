@@ -5,6 +5,10 @@
 <title>Hoax Detector</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #0f172a, #1e293b);
@@ -24,6 +28,7 @@ body {
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     text-align: center;
     animation: fadeIn 0.6s ease;
+    margin: auto;
 }
 
 @keyframes fadeIn {
@@ -45,6 +50,7 @@ textarea {
     margin-bottom: 15px;
     font-size: 14px;
     outline: none;
+    display: block;
 }
 
 button {
@@ -57,6 +63,7 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    display: block;
 }
 
 button:hover {
